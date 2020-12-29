@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>前端跨域调试</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+    <input id="url-ipt" type="text" >
+    <button id="mock">点我一下出结果</button>
+    <div id="result"></div>
+    <script>
+        $('#url-ipt').val('/test')
+        $('#mock').click(function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://127.0.0.1:5000'+$('#url-ipt').val(), true);
+            xhr.withCredentials = true;
+            xhr.addEventListener("load", function() {
+              const result = this.responseText
+              $('#result').html(JSON.stringify(result))
+            });
+            xhr.send(null);
+        })
+    </script>
+</body>
+</html>
